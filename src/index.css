@@ -2,14 +2,14 @@
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --color-visuera-green: #2D5A27;
-  --color-visuera-light-green: #4CAF50;
-  --color-visuera-dark: #1A1A1A;
+  --color-visupro-green: #2D5A27;
+  --color-visupro-light-green: #4CAF50;
+  --color-visupro-dark: #1A1A1A;
 }
 
 @layer base {
   body {
-    @apply font-sans text-visuera-dark bg-white;
+    @apply font-sans text-visupro-dark bg-white;
   }
 }
 
