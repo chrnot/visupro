@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { 
   ShieldCheck, 
   Zap, 
@@ -12,7 +12,10 @@ import {
   Building2,
   Clock,
   Lock,
-  Database
+  Database,
+  Layers,
+  Rocket,
+  Settings
 } from 'lucide-react';
 
 const Navbar = () => (
@@ -27,6 +30,7 @@ const Navbar = () => (
       <a href="#problem" className="hover:text-visupro-light-green transition-colors">Utmaningen</a>
       <a href="#fordelar" className="hover:text-visupro-light-green transition-colors">Fördelar</a>
       <a href="#segment" className="hover:text-visupro-light-green transition-colors">Marknad</a>
+      <a href="#pris" className="hover:text-visupro-light-green transition-colors">Pris</a>
     </div>
     <button className="bg-visupro-green text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-visupro-light-green transition-all shadow-md">
       Boka Demo
@@ -119,51 +123,148 @@ const ProcessVisual = () => (
     </div>
   </div>
 );
+const Hero = () => {
+  const [showCyot, setShowCyot] = React.useState(false);
+  const [showAci, setShowAci] = React.useState(false);
 
-const Hero = () => (
-  <section className="relative pt-32 pb-20 px-6 overflow-hidden bg-slate-50">
-    <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-      <motion.div 
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-visupro-light-green/10 text-visupro-green text-xs font-bold uppercase tracking-wider mb-6">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-visupro-light-green opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-visupro-light-green"></span>
-          </span>
-          Nystart: 15 års erfarenhet möter ny innovation
-        </div>
-        <h1 className="text-5xl lg:text-7xl font-bold leading-[1.1] mb-6 text-visupro-dark">
-          Från dokumenterad process till <span className="text-visupro-green italic">klickbar funktion</span>
-        </h1>
-        <p className="text-lg text-slate-600 mb-8 max-w-xl leading-relaxed">
-          Visupro moderniserar din vardag genom att sömlöst sammankoppla den fysiska och digitala verksamheten. Vi skapar digitalt processtöd som faktiskt gör skillnad.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4">
-          <button className="bg-visupro-green text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-visupro-light-green transition-all shadow-xl hover:shadow-visupro-light-green/20">
-            Kom igång nu <ArrowRight size={20} />
-          </button>
-          <button className="bg-white text-visupro-dark border border-slate-200 px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-50 transition-all">
-            Se hur det fungerar
-          </button>
-        </div>
-      </motion.div>
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="relative"
-      >
-        <ProcessVisual />
-        {/* Decorative elements */}
-        <div className="absolute -top-6 -right-6 w-32 h-32 bg-visupro-light-green/20 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-visupro-green/10 rounded-full blur-3xl"></div>
-      </motion.div>
-    </div>
-  </section>
-);
+  return (
+    <section className="relative pt-32 pb-20 px-6 overflow-hidden bg-slate-50">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-start">
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-visupro-light-green/10 text-visupro-green text-xs font-bold uppercase tracking-wider mb-6">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-visupro-light-green opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-visupro-light-green"></span>
+            </span>
+            Nystart: 15 års erfarenhet möter ny innovation
+          </div>
+          <h1 className="text-4xl lg:text-6xl font-bold leading-[1.1] mb-6 text-visupro-dark">
+            Från dokumenterad process till <span className="text-visupro-green italic">klickbar funktion</span>
+          </h1>
+          <div className="space-y-6 text-lg text-slate-600 mb-8 max-w-xl leading-relaxed">
+            <p>
+              Visupro moderniserar din vardag genom att sömlöst sammankoppla den fysiska och digitala verksamheten. Vi skapar digitalt processtöd som faktiskt gör skillnad – på riktigt.
+            </p>
+            <p>
+              Vi har lämnat tiden bakom oss där stela "one size fits all"-system räcker till. I en föränderlig marknad krävs flexibilitet och precision. Därför bygger Visupro på konceptet CYOT (Create Your Own Tools). Vi ger er kraften att själva designa och äga era verktyg, vilket förvandlar varje dokumenterad process till en klickbar funktion skräddarsydd efter just era behov.
+            </p>
+            <p>
+              Genom att kombinera mänsklig expertis med avancerad teknik möjliggör vi ACI (Augmented Collective Intelligence). Det handlar om att förstärka er samlade kompetens med intelligent datastöd, så att ni kan fatta snabbare och mer pricksäkra beslut.
+            </p>
+            <p>
+              Med Visupro köper ni inte bara ett system – ni investerar i förmågan att ständigt innovera och optimera er egen verksamhet.
+            </p>
+          </div>
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="flex flex-col gap-8 lg:pt-32"
+        >
+          <div className="relative">
+            <ProcessVisual />
+            {/* Decorative elements */}
+            <div className="absolute -top-6 -right-6 w-32 h-32 bg-visupro-light-green/20 rounded-full blur-3xl"></div>
+            <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-visupro-green/10 rounded-full blur-3xl"></div>
+          </div>
+
+          <div className="space-y-4 w-full">
+            {/* CYOT Button and Fold-out */}
+            <div className="w-full">
+              <button 
+                onClick={() => {
+                  setShowCyot(!showCyot);
+                  if (!showCyot) setShowAci(false);
+                }}
+                className={`w-full px-8 py-5 rounded-xl font-bold text-lg flex items-center justify-between transition-all shadow-lg ${
+                  showCyot 
+                    ? 'bg-visupro-green text-white shadow-visupro-green/20' 
+                    : 'bg-white text-visupro-dark border border-slate-200 hover:border-visupro-green/50'
+                }`}
+              >
+                <span>CYOT (Create Your Own Tools)</span>
+                <ArrowRight size={22} className={`transition-transform duration-300 ${showCyot ? 'rotate-90' : ''}`} />
+              </button>
+              
+              <AnimatePresence>
+                {showCyot && (
+                  <motion.div 
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="bg-white p-6 rounded-b-2xl border-x border-b border-visupro-green/20 shadow-inner mt-[-10px] pt-8">
+                      <div className="space-y-3">
+                        <p className="text-slate-700 leading-relaxed">
+                          <span className="font-bold text-visupro-green">Unika uppgifter:</span> Vi ger medarbetare verktygen att lösa de unika och komplexa uppgifter som moderna organisationer ställs inför.
+                        </p>
+                        <p className="text-slate-700 leading-relaxed">
+                          <span className="font-bold text-visupro-green">Kompetensutveckling:</span> Genom att bygga egna verktyg får medarbetarna en djupare förståelse för verksamhetens faktiska behov.
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* ACI Button and Fold-out */}
+            <div className="w-full">
+              <button 
+                onClick={() => {
+                  setShowAci(!showAci);
+                  if (!showAci) setShowCyot(false);
+                }}
+                className={`w-full px-8 py-5 rounded-xl font-bold text-lg flex items-center justify-between transition-all shadow-lg ${
+                  showAci 
+                    ? 'bg-visupro-green text-white shadow-visupro-green/20' 
+                    : 'bg-white text-visupro-dark border border-slate-200 hover:border-visupro-green/50'
+                }`}
+              >
+                <span>ACI (Augmented Collective Intelligence)</span>
+                <ArrowRight size={22} className={`transition-transform duration-300 ${showAci ? 'rotate-90' : ''}`} />
+              </button>
+              
+              <AnimatePresence>
+                {showAci && (
+                  <motion.div 
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="bg-white p-6 rounded-b-2xl border-x border-b border-visupro-green/20 shadow-inner mt-[-10px] pt-8">
+                      <p className="text-slate-700 leading-relaxed mb-4">
+                        Visupro fungerar som en kommunikationsport som gör den samlade mänskliga kunskapen tillgänglig och sökbar.
+                      </p>
+                      <div className="space-y-3">
+                        <p className="text-slate-700 leading-relaxed">
+                          <span className="font-bold text-visupro-green">Från data till insikt:</span> Vi strukturerar splittrad data och manuell administration, vilket skapar den nödvändiga grunden för att dra nytta av AI-verktyg.
+                        </p>
+                        <p className="text-slate-700 leading-relaxed">
+                          <span className="font-bold text-visupro-green">Kollektiv kraft:</span> Genom att integrera med befintliga kärnsystem via API kan vi "koppla ihop hjärnorna" i organisationen för effektivare beslötssfattande.
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
 
 const ProblemSolution = () => (
   <section id="problem" className="py-24 px-6 bg-white">
@@ -363,7 +464,10 @@ const Segments = () => (
     <div className="max-w-7xl mx-auto">
       <div className="text-center mb-16">
         <h2 className="text-sm font-bold text-visupro-light-green uppercase tracking-widest mb-3">Marknad och behov</h2>
-        <p className="text-3xl lg:text-4xl font-bold text-visupro-dark">Oändlig potential i tjänsteutbudet</p>
+        <p className="text-3xl lg:text-4xl font-bold text-visupro-dark mb-6">Oändlig potential i tjänsteutbudet</p>
+        <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+          <span className="font-bold text-visupro-green">CYOT</span> (Create Your Own Tools) & <span className="font-bold text-visupro-green">ACI</span> (Augmented Collective Intelligence) erbjuder en metod med oändlig potential i tjänsteutbudet med standardiserade och anpassningsbara processer för flera marknader så som:
+        </p>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-16 items-start">
@@ -477,6 +581,121 @@ const Segments = () => (
   </section>
 );
 
+const Pricing = () => (
+  <section id="pris" className="py-24 px-6 bg-slate-50">
+    <div className="max-w-7xl mx-auto">
+      <div className="mb-12">
+        <h2 className="text-4xl lg:text-5xl font-bold text-[#1e3a8a] mb-4 uppercase">
+          Ny licensmodell & anpassning
+        </h2>
+        <div className="flex items-center gap-3">
+          <div className="w-1 h-8 bg-visupro-green"></div>
+          <p className="text-xl text-slate-500">
+            Prissättning optimerad för volym och strategisk anpassning.
+          </p>
+        </div>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-8 mb-12">
+        {/* Nivå 1 */}
+        <div className="bg-white rounded-3xl p-10 border border-slate-100 shadow-sm relative group hover:shadow-xl transition-all">
+          <div className="absolute top-6 right-6 px-3 py-1 bg-slate-100 text-slate-500 text-[10px] font-bold rounded-md uppercase">
+            Nivå 1
+          </div>
+          <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-8 text-slate-400 group-hover:bg-visupro-green group-hover:text-white transition-colors">
+            <Layers size={32} />
+          </div>
+          <h3 className="text-2xl font-bold mb-6 text-visupro-dark">1 Process</h3>
+          <div className="flex items-baseline gap-2 mb-6">
+            <span className="text-4xl font-bold text-[#1e3a8a]">10 000 kr</span>
+            <span className="text-slate-400">/ år</span>
+          </div>
+          <p className="text-slate-500 leading-relaxed">
+            Startpunkt för nya kunder. Fokus på enskilda kritiska flöden.
+          </p>
+        </div>
+
+        {/* Nivå 2 */}
+        <div className="bg-[#eff6ff] rounded-3xl p-10 border-2 border-visupro-green/30 shadow-xl relative group transform hover:-translate-y-2 transition-all">
+          <div className="absolute -top-4 right-6 px-4 py-2 bg-[#1e3a8a] text-white text-[10px] font-bold rounded-md uppercase tracking-widest shadow-lg">
+            Optimal Volym
+          </div>
+          <div className="absolute top-6 right-6 px-3 py-1 bg-visupro-green/20 text-visupro-green text-[10px] font-bold rounded-md uppercase">
+            Nivå 2
+          </div>
+          <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-8 text-visupro-green shadow-sm">
+            <Rocket size={32} />
+          </div>
+          <h3 className="text-2xl font-bold mb-6 text-visupro-dark">4 Processer</h3>
+          <div className="flex items-baseline gap-2 mb-1">
+            <span className="text-4xl font-bold text-[#1e3a8a]">8 000 kr</span>
+            <span className="text-visupro-green text-sm">/ process / år</span>
+          </div>
+          <p className="text-visupro-green font-bold italic text-sm mb-6">Total: 32 000 kr / år</p>
+          <p className="text-slate-600 leading-relaxed">
+            Vår mest populära nivå för växande verksamheter som vill digitalisera flera flöden.
+          </p>
+        </div>
+
+        {/* Enterprise */}
+        <div className="bg-white rounded-3xl p-10 border border-slate-100 shadow-sm relative group hover:shadow-xl transition-all">
+          <div className="absolute top-6 right-6 px-3 py-1 bg-visupro-light-green/20 text-visupro-light-green text-[10px] font-bold rounded-md uppercase">
+            Enterprise
+          </div>
+          <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-8 text-visupro-light-green group-hover:bg-visupro-light-green group-hover:text-white transition-colors">
+            <ShieldCheck size={32} />
+          </div>
+          <h3 className="text-2xl font-bold mb-6 text-visupro-dark">10 Processer</h3>
+          <div className="flex items-baseline gap-2 mb-1">
+            <span className="text-4xl font-bold text-visupro-light-green">5 000 kr</span>
+            <span className="text-slate-400 text-sm">/ process / år</span>
+          </div>
+          <p className="text-visupro-light-green font-bold italic text-sm mb-6">Total: 50 000 kr / år</p>
+          <p className="text-slate-500 leading-relaxed">
+            För stora organisationer med omfattande behov av processtöd och integrationer.
+          </p>
+        </div>
+      </div>
+
+      {/* Adaptation Section */}
+      <div className="bg-visupro-dark rounded-3xl p-12 text-white shadow-2xl relative overflow-hidden">
+        <div className="flex items-center gap-3 mb-10 text-visupro-light-green">
+          <Settings size={24} className="animate-spin-slow" />
+          <h3 className="text-xl font-bold uppercase tracking-widest">
+            Anpassningseffekten (Engångsintäkter)
+          </h3>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-12 relative">
+          {/* Column 1 */}
+          <div className="relative">
+            <div className="text-3xl font-bold mb-2">5 000 kr</div>
+            <div className="text-visupro-light-green font-bold text-sm uppercase mb-3">Liten anpassning</div>
+            <p className="text-slate-400 text-sm italic">Textjusteringar, fältändringar.</p>
+            <div className="hidden md:block absolute right-[-24px] top-0 h-full w-px bg-white/10"></div>
+          </div>
+
+          {/* Column 2 */}
+          <div className="relative">
+            <div className="text-3xl font-bold mb-2">10 000 kr</div>
+            <div className="text-visupro-light-green font-bold text-sm uppercase mb-3">Normal anpassning</div>
+            <p className="text-slate-400 text-sm italic">Nya steg, logik, notifieringar.</p>
+            <div className="hidden md:block absolute right-[-24px] top-0 h-full w-px bg-white/10"></div>
+          </div>
+
+          {/* Column 3 */}
+          <div>
+            <div className="text-3xl font-bold mb-2">15 - 25 000 kr</div>
+            <div className="text-visupro-light-green font-bold text-sm uppercase mb-3">Stor anpassning</div>
+            <p className="text-slate-400 text-sm italic">Integrationer, avancerad logik.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+);
+
 const Footer = () => (
   <footer className="bg-visupro-dark text-white py-20 px-6">
     <div className="max-w-7xl mx-auto text-center">
@@ -527,6 +746,7 @@ export default function App() {
         <Benefits />
         <Process />
         <Segments />
+        <Pricing />
       </main>
       <Footer />
     </div>
